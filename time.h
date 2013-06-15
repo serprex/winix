@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <sys/time.h>
 static struct timeval tvx;
-stain void timeinit(){
+stain void inittime(){
 	gettimeofday(&tvx,0);
 }
 stain double timesince(){
@@ -17,6 +17,10 @@ stain void sleepd(double x){
 	if(x>0){
 		usleep(x*1000000);
 	}
+}
+stain void endframe(int fps){
+	sleepd(1./fps-timesince());
+	inittime();
 }
 #endif
 #undef stain
